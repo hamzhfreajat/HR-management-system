@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Neonderthaw&family=Rubik:wght@400;500;600;700&display=swap');:root{
+    --primary:#fff;
+    --secondary:#F94892;
+    --third:#FFA1C9;
+    --four:#FBE5E5;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family:"Rubik";
+    display: grid;
+    grid-template-rows:65px 1fr 65px ;
+    height: 100%;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+d-flex{
+    display: flex;
+}
+
+.container{
+    max-width:1400px;
+    margin: 0 auto;
+}
+.active a{
+    color: #7A0BC0;
+}
+.main-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 50px;
+}
+#user-table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+#user-table td, #user-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#user-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#user-table tr:hover {background-color: #ddd;}
+
+#user-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:#270082 ;
+    color: white;
+}
+
+/* ========== Header =========*/
+header{
+    background-color: var(--primary);
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    padding: 0 10px;
+}
+header .container{
+    height: 100%;
+}
+.shadow{
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+}
+.top-header{
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.logo h5{
+    font-family: 'Rubik';
+    color: #270082;
+    font-size: 25px;
+    margin: 0;
+}
+.header-logo{
+    flex-grow: 2;
+    display: flex;
+}
+.header-nav{
+    flex-grow: 4;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.nav-list{
+    list-style: none;
+    display: flex;
+    margin: 0px 20px;
+}
+.nav-link{
+    text-decoration: none;
+    color: #270082;
+    margin: 0px  5px;
+}
+
+
+
+/*  ========= Footer ==============*/
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+    background-color: #270082 ;
+}
+footer .logo h5{
+    color: #fff;
+    font-size: 21px;
+    font-family: 'Rubik';
+    font-weight: 400;
+}
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.footer-socail-media ul{
+    display: flex
+}
+.footer-copyright{
+    color: #fff;
+}
+.footer-socail-media a{
+    margin: 0px 5px;
+    transition: 0.3s ease;
+}
+.footer-socail-media i:hover{
+    color: #7A0BC0;
+}
+.footer-socail-media i{
+    color: #fff;
+    font-size: 24px;
+}
