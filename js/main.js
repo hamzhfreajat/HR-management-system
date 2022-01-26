@@ -1,4 +1,5 @@
 let refId = 10000;
+var emploeies = [];
 const uniqueid = function(){
     refId++;
     return refId;
@@ -24,6 +25,18 @@ function netSalary(tax , level){
     salary = Math.floor(salary - salary * tax);
     return salary;
 }
+const readFromLocalStorage = () =>  {
+    let jsonArr = localStorage.getItem('emploeies');
+    emploeies = JSON.parse(jsonArr);
+    if (emploeies !== null) {
+        console.log("not null")
+        return emploeies;
+    } else {
+        emploeies = [];
+        return emploeies;
+    }
+}
+
 function Employee(id ,fullName,dapartment,level,imageUrl,salary){
     this.id  = id;
     this.fullName= fullName;
@@ -32,34 +45,23 @@ function Employee(id ,fullName,dapartment,level,imageUrl,salary){
     this.imageUrl = imageUrl;
     this.salary = salary;
 }
-//
-// const ghazi = new Employee(1000 , "Ghazi Samer" , "Administration" , "Senior");
-// const lana = new Employee(1001 , "Lana Ali" , "Finance" , "Senior");
-// const tamara = new Employee(1002 , "Tamara Ayoub" , "Marketing" , "Senior");
-// const safi = new Employee(1003 , "Safi Walid" , "Administration" , "Mid-Senior");
-// const omar = new Employee(1004 , "Omar Zaid" , "Development" , "Senior");
-// const rana = new Employee(1005 , "Rana Saleh" , "Development" , "Junior");
-// const hadi = new Employee(1006 , "Hadi Ahmad" , "Finance" , "Mid-Senior");
-//
-// const employeeArray = [ghazi , lana , tamara  , safi , omar , rana , hadi];
-//
-// Employee.prototype.render = function (){
-//     const tableBody =  document.getElementById('user-table-body');
-//     let counter = 0 ;
-//     employeeArray.forEach(item => {
-//         counter++;
-//         tableBody.innerHTML +=
-//             `<tr><th>${counter}</th>
-//              <td>${item.fullName}</td>
-//               <td>${netSalary(0.075 , item.level)}</td>
-//              </tr>
-//             `
-//     });
-// };
-//
-// ghazi.render();
+const render = (emploeiesHtml) => {
+
+    const cardSection = document.getElementById("emploee-card");
+    cardSection.innerHTML = "";
+    emploeiesHtml.forEach((employee) => {
+        if (employee.imageUrl === undefined){
+            employee.imageUrl = '#'
+        }
+        cardSection.innerHTML += `<div class="card"><img src="${employee.imageUrl}" alt="card-image"><h5>Dapartment: ${employee.dapartment} - level :${employee.level}</h5><p
+        class="card-text">Name: ${employee.fullName} -ID: ${employee.id}</p><p class="card-salary">${employee.salary}</p></div>`
+    })
+
+}
+
 
 const employeeForm = document.getElementById('create-employee-form');
+
 employeeForm.addEventListener('submit' ,(e) => {
     e.preventDefault();
     const userId = uniqueid();
@@ -69,26 +71,15 @@ employeeForm.addEventListener('submit' ,(e) => {
     const userImageUrl = e.target.imageUrl.value;
     const userSalary = netSalary(0.075 , userLevel)
     let newEmployee = new Employee(userId, userFullName ,userDapartment, userLevel,userImageUrl,userSalary);
-    Employee.prototype.render = function (){
-        const cardSection = document.getElementById("emploee-card");
-        const div = document.createElement('div');
-        const img = document.createElement('img');
-        const h5 = document.createElement('h5');
-        const p1 = document.createElement('p');
-        const p2 = document.createElement('p');
-        div.setAttribute('class' , 'card')
-        img.setAttribute('src' , userImageUrl);
-        img.setAttribute('alt' , 'card-image');
-        h5.textContent = `Dapartment: ${userDapartment} - level :${userLevel}`;
-        p1.textContent = `Name: ${userFullName} -ID: ${userId}`;
-        p1.setAttribute('class' , 'card-text');
-        p2.textContent = `${userSalary}`;
-        p2.setAttribute('class' , 'card-salary');
-        cardSection.appendChild(div);
-        div.appendChild(img);
-        div.appendChild(h5);
-        div.appendChild(p1);
-        div.appendChild(p2);
+    emploeies.push(newEmployee);
+    emploeies = JSON.stringify(emploeies);
+    localStorage.setItem('emploeies',emploeies);
+    render(readFromLocalStorage());
+});
+
+const employArrNotEmpty= () =>{
+    if (emploeies.length < 1  && readFromLocalStorage.length < 1){
+       render(readFromLocalStorage());
     }
-    newEmployee.render();
-})
+}
+employArrNotEmpty();
